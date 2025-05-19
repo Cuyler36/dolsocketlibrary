@@ -21,6 +21,17 @@ typedef struct IFFifo {
     s32 used; // offset 0xC, size 0x4
 } IFFifo;
 
+void IFFifoInit(IFFifo* fifo, void* buff, s32 size);
+void * IFFifoAlloc(IFFifo* fifo, s32 len);
+BOOL IFFifoFree(IFFifo* fifo, void* ptr, s32 len);
+void IFDump(void* ptr, s32 len);
+
+u8* IFRingIn(u8* buf, s32 size, u8* head, s32 used, const u8* data, s32 len);
+u8* IFRingOut(u8* buf, s32 size, u8* head, s32 used, u8* data, s32 len);
+int IFRingGet(u8* buf, s32 size, u8* head, s32 used, IFVec* vec, s32 len);
+u8* IFRingPut(u8* buf, s32 size, u8* head, s32 used, s32 len);
+u8* IFRingInEx(u8* buf, s32 size, u8* head, s32 used, s32 offset, const u8* data, s32 * adv, IFBlock* blockTable, s32 maxblock);
+
 #ifdef __cplusplus
 }
 #endif

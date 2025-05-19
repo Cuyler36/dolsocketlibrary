@@ -179,7 +179,7 @@ BOOL IFFifoFree(IFFifo* fifo /* r31 */, void* ptr /* r1+0xC */, s32 len /* r26 *
 }
 
 // Range: 0x648 -> 0x748
-void IFDump(void * ptr /* r28 */, long len /* r27 */) {
+void IFDump(void* ptr /* r28 */, s32 len /* r27 */) {
     // Local variables
     int j; // r30
     int i; // r31
