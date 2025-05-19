@@ -3,6 +3,7 @@
 
 #include <dolphin/types.h>
 #include <dolphin/os.h>
+#include <dolphin/ip/IFQueue.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,6 +15,9 @@ extern "C" {
 #define IP_HLEN(ip) (((ip)->verlen & 0xF) << 2)
 
 #define IP_INET 2
+
+// TODO: where does this go? IPEth? IPArp?
+#define ETH_IP 0x0800
 
 /* Supported IP protocols */
 #define IP_PROTO_ICMP 0x01
@@ -28,15 +32,6 @@ typedef struct IPSocket {
     u16 port; // offset 0x2, size 0x2
     u8 addr[4]; // offset 0x4, size 0x4
 } IPSocket;
-
-typedef struct IFQueue IFQueue;
-typedef struct IFQueue IFLink;
-
-struct IFQueue {
-    // total size: 0x8
-    IFQueue* next; // offset 0x0, size 0x4
-    IFQueue* prev; // offset 0x4, size 0x4
-};
 
 typedef struct IPInfo {
     // total size: 0x20
@@ -76,6 +71,16 @@ typedef struct IFDatagram {
     s32 nVec; // offset 0x30, size 0x4
     IFVec vec[1]; // offset 0x34, size 0x8
 } IFDatagram;
+
+typedef struct IPInterfaceConf {
+    // total size: 0x40
+    IPInterface* interface; // offset 0x0, size 0x4
+    IFQueue link; // offset 0x4, size 0x8
+    u8 addr[4]; // offset 0xC, size 0x4
+    OSAlarm alarm; // offset 0x10, size 0x28
+    s32 count; // offset 0x38, size 0x4
+    void (* callback)(void *, long); // offset 0x3C, size 0x4
+} IPInterfaceConf;
 
 typedef struct IPInterfaceStat {
     // total size: 0x24
@@ -128,6 +133,9 @@ typedef struct IPHeader {
     u8 src[4]; // offset 0xC, size 0x4
     u8 dst[4]; // offset 0x10, size 0x4
 } IPHeader;
+
+char* IPNtoA(const u8* addr);
+void IFInitDatagram(IFDatagram* datagram, u16 type, int nVec);
 
 #ifdef __cplusplus
 }

@@ -1,9 +1,8 @@
 {
-  "$schema": "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json",
   "custom_make": "make",
   "custom_args": [],
-  "build_target": false,
   "build_base": true,
+  "build_target": false,
   "watch_patterns": [
     "*.c",
     "*.cp",
@@ -24,424 +23,424 @@
   ],
   "units": [
     {
-        "name": "dvdethD/dvdeth.o",
-        "target_path": "baserom/debug/dvdeth/dvdeth.o",
-        "base_path": "build/debug/dvdeth/dvdeth.o",
-        "metadata": {}
+      "name": "dvdethD/dvdeth.o",
+      "target_path": "baserom/debug/dvdeth/dvdeth.o",
+      "base_path": "build/debug/dvdeth/dvdeth.o",
+      "metadata": {}
     },
     {
-        "name": "dvdethD/dvdetherror.o",
-        "target_path": "baserom/debug/dvdeth/dvdetherror.o",
-        "base_path": "build/debug/dvdeth/dvdetherror.o",
-        "metadata": {}
+      "name": "dvdethD/dvdetherror.o",
+      "target_path": "baserom/debug/dvdeth/dvdetherror.o",
+      "base_path": "build/debug/dvdeth/dvdetherror.o",
+      "metadata": {}
     },
     {
-        "name": "dvdethD/dvdethFatal.o",
-        "target_path": "baserom/debug/dvdeth/dvdethFatal.o",
-        "base_path": "build/debug/dvdeth/dvdethFatal.o",
-        "metadata": {}
+      "name": "dvdethD/dvdethFatal.o",
+      "target_path": "baserom/debug/dvdeth/dvdethFatal.o",
+      "base_path": "build/debug/dvdeth/dvdethFatal.o",
+      "metadata": {}
     },
     {
-        "name": "dvdethD/dvdethfs.o",
-        "target_path": "baserom/debug/dvdeth/dvdethfs.o",
-        "base_path": "build/debug/dvdeth/dvdethfs.o",
-        "metadata": {}
+      "name": "dvdethD/dvdethfs.o",
+      "target_path": "baserom/debug/dvdeth/dvdethfs.o",
+      "base_path": "build/debug/dvdeth/dvdethfs.o",
+      "metadata": {}
     },
     {
-        "name": "dvdethD/dvdethidutils.o",
-        "target_path": "baserom/debug/dvdeth/dvdethidutils.o",
-        "base_path": "build/debug/dvdeth/dvdethidutils.o",
-        "metadata": {}
+      "name": "dvdethD/dvdethidutils.o",
+      "target_path": "baserom/debug/dvdeth/dvdethidutils.o",
+      "base_path": "build/debug/dvdeth/dvdethidutils.o",
+      "metadata": {}
     },
     {
-        "name": "dvdethD/dvdethlow.o",
-        "target_path": "baserom/debug/dvdeth/dvdethlow.o",
-        "base_path": "build/debug/dvdeth/dvdethlow.o",
-        "metadata": {}
+      "name": "dvdethD/dvdethlow.o",
+      "target_path": "baserom/debug/dvdeth/dvdethlow.o",
+      "base_path": "build/debug/dvdeth/dvdethlow.o",
+      "metadata": {}
     },
     {
-        "name": "dvdethD/dvdethqueue.o",
-        "target_path": "baserom/debug/dvdeth/dvdethqueue.o",
-        "base_path": "build/debug/dvdeth/dvdethqueue.o",
-        "metadata": {}
+      "name": "dvdethD/dvdethqueue.o",
+      "target_path": "baserom/debug/dvdeth/dvdethqueue.o",
+      "base_path": "build/debug/dvdeth/dvdethqueue.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IFFifo.o",
-        "target_path": "baserom/debug/ip/IFFifo.o",
-        "base_path": "build/debug/ip/IFFifo.o",
-        "metadata": {}
+      "name": "ipD/IFFifo.o",
+      "target_path": "baserom/debug/ip/IFFifo.o",
+      "base_path": "build/debug/ip/IFFifo.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IFRing.o",
-        "target_path": "baserom/debug/ip/IFRing.o",
-        "base_path": "build/debug/ip/IFRing.o",
-        "metadata": {}
+      "name": "ipD/IFRing.o",
+      "target_path": "baserom/debug/ip/IFRing.o",
+      "base_path": "build/debug/ip/IFRing.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IP.o",
-        "target_path": "baserom/debug/ip/IP.o",
-        "base_path": "build/debug/ip/IP.o",
-        "metadata": {}
+      "name": "ipD/IP.o",
+      "target_path": "baserom/debug/ip/IP.o",
+      "base_path": "build/debug/ip/IP.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPArp.o",
-        "target_path": "baserom/debug/ip/IPArp.o",
-        "base_path": "build/debug/ip/IPArp.o",
-        "metadata": {}
+      "name": "ipD/IPArp.o",
+      "target_path": "baserom/debug/ip/IPArp.o",
+      "base_path": "build/debug/ip/IPArp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPChap.o",
-        "target_path": "baserom/debug/ip/IPChap.o",
-        "base_path": "build/debug/ip/IPChap.o",
-        "metadata": {}
+      "name": "ipD/IPChap.o",
+      "target_path": "baserom/debug/ip/IPChap.o",
+      "base_path": "build/debug/ip/IPChap.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPDhcp.o",
-        "target_path": "baserom/debug/ip/IPDhcp.o",
-        "base_path": "build/debug/ip/IPDhcp.o",
-        "metadata": {}
+      "name": "ipD/IPDhcp.o",
+      "target_path": "baserom/debug/ip/IPDhcp.o",
+      "base_path": "build/debug/ip/IPDhcp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPDns.o",
-        "target_path": "baserom/debug/ip/IPDns.o",
-        "base_path": "build/debug/ip/IPDns.o",
-        "metadata": {}
+      "name": "ipD/IPDns.o",
+      "target_path": "baserom/debug/ip/IPDns.o",
+      "base_path": "build/debug/ip/IPDns.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPEther.o",
-        "target_path": "baserom/debug/ip/IPEther.o",
-        "base_path": "build/debug/ip/IPEther.o",
-        "metadata": {}
+      "name": "ipD/IPEther.o",
+      "target_path": "baserom/debug/ip/IPEther.o",
+      "base_path": "build/debug/ip/IPEther.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPFrag.o",
-        "target_path": "baserom/debug/ip/IPFrag.o",
-        "base_path": "build/debug/ip/IPFrag.o",
-        "metadata": {}
+      "name": "ipD/IPFrag.o",
+      "target_path": "baserom/debug/ip/IPFrag.o",
+      "base_path": "build/debug/ip/IPFrag.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPIcmp.o",
-        "target_path": "baserom/debug/ip/IPIcmp.o",
-        "base_path": "build/debug/ip/IPIcmp.o",
-        "metadata": {}
+      "name": "ipD/IPIcmp.o",
+      "target_path": "baserom/debug/ip/IPIcmp.o",
+      "base_path": "build/debug/ip/IPIcmp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPIgmp.o",
-        "target_path": "baserom/debug/ip/IPIgmp.o",
-        "base_path": "build/debug/ip/IPIgmp.o",
-        "metadata": {}
+      "name": "ipD/IPIgmp.o",
+      "target_path": "baserom/debug/ip/IPIgmp.o",
+      "base_path": "build/debug/ip/IPIgmp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPIpcp.o",
-        "target_path": "baserom/debug/ip/IPIpcp.o",
-        "base_path": "build/debug/ip/IPIpcp.o",
-        "metadata": {}
+      "name": "ipD/IPIpcp.o",
+      "target_path": "baserom/debug/ip/IPIpcp.o",
+      "base_path": "build/debug/ip/IPIpcp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPLcp.o",
-        "target_path": "baserom/debug/ip/IPLcp.o",
-        "base_path": "build/debug/ip/IPLcp.o",
-        "metadata": {}
+      "name": "ipD/IPLcp.o",
+      "target_path": "baserom/debug/ip/IPLcp.o",
+      "base_path": "build/debug/ip/IPLcp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPMisc.o",
-        "target_path": "baserom/debug/ip/IPMisc.o",
-        "base_path": "build/debug/ip/IPMisc.o",
-        "metadata": {}
+      "name": "ipD/IPMisc.o",
+      "target_path": "baserom/debug/ip/IPMisc.o",
+      "base_path": "build/debug/ip/IPMisc.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPOpt.o",
-        "target_path": "baserom/debug/ip/IPOpt.o",
-        "base_path": "build/debug/ip/IPOpt.o",
-        "metadata": {}
+      "name": "ipD/IPOpt.o",
+      "target_path": "baserom/debug/ip/IPOpt.o",
+      "base_path": "build/debug/ip/IPOpt.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPPap.o",
-        "target_path": "baserom/debug/ip/IPPap.o",
-        "base_path": "build/debug/ip/IPPap.o",
-        "metadata": {}
+      "name": "ipD/IPPap.o",
+      "target_path": "baserom/debug/ip/IPPap.o",
+      "base_path": "build/debug/ip/IPPap.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPPPP.o",
-        "target_path": "baserom/debug/ip/IPPPP.o",
-        "base_path": "build/debug/ip/IPPPP.o",
-        "metadata": {}
+      "name": "ipD/IPPPP.o",
+      "target_path": "baserom/debug/ip/IPPPP.o",
+      "base_path": "build/debug/ip/IPPPP.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPPPPoE.o",
-        "target_path": "baserom/debug/ip/IPPPPoE.o",
-        "base_path": "build/debug/ip/IPPPPoE.o",
-        "metadata": {}
+      "name": "ipD/IPPPPoE.o",
+      "target_path": "baserom/debug/ip/IPPPPoE.o",
+      "base_path": "build/debug/ip/IPPPPoE.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPRoute.o",
-        "target_path": "baserom/debug/ip/IPRoute.o",
-        "base_path": "build/debug/ip/IPRoute.o",
-        "metadata": {}
+      "name": "ipD/IPRoute.o",
+      "target_path": "baserom/debug/ip/IPRoute.o",
+      "base_path": "build/debug/ip/IPRoute.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPSocket.o",
-        "target_path": "baserom/debug/ip/IPSocket.o",
-        "base_path": "build/debug/ip/IPSocket.o",
-        "metadata": {}
+      "name": "ipD/IPSocket.o",
+      "target_path": "baserom/debug/ip/IPSocket.o",
+      "base_path": "build/debug/ip/IPSocket.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPTcp.o",
-        "target_path": "baserom/debug/ip/IPTcp.o",
-        "base_path": "build/debug/ip/IPTcp.o",
-        "metadata": {}
+      "name": "ipD/IPTcp.o",
+      "target_path": "baserom/debug/ip/IPTcp.o",
+      "base_path": "build/debug/ip/IPTcp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPTcpOutput.o",
-        "target_path": "baserom/debug/ip/IPTcpOutput.o",
-        "base_path": "build/debug/ip/IPTcpOutput.o",
-        "metadata": {}
+      "name": "ipD/IPTcpOutput.o",
+      "target_path": "baserom/debug/ip/IPTcpOutput.o",
+      "base_path": "build/debug/ip/IPTcpOutput.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPTcpTimer.o",
-        "target_path": "baserom/debug/ip/IPTcpTimer.o",
-        "base_path": "build/debug/ip/IPTcpTimer.o",
-        "metadata": {}
+      "name": "ipD/IPTcpTimer.o",
+      "target_path": "baserom/debug/ip/IPTcpTimer.o",
+      "base_path": "build/debug/ip/IPTcpTimer.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPTcpTimeWait.o",
-        "target_path": "baserom/debug/ip/IPTcpTimeWait.o",
-        "base_path": "build/debug/ip/IPTcpTimeWait.o",
-        "metadata": {}
+      "name": "ipD/IPTcpTimeWait.o",
+      "target_path": "baserom/debug/ip/IPTcpTimeWait.o",
+      "base_path": "build/debug/ip/IPTcpTimeWait.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPTcpUser.o",
-        "target_path": "baserom/debug/ip/IPTcpUser.o",
-        "base_path": "build/debug/ip/IPTcpUser.o",
-        "metadata": {}
+      "name": "ipD/IPTcpUser.o",
+      "target_path": "baserom/debug/ip/IPTcpUser.o",
+      "base_path": "build/debug/ip/IPTcpUser.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPUdp.o",
-        "target_path": "baserom/debug/ip/IPUdp.o",
-        "base_path": "build/debug/ip/IPUdp.o",
-        "metadata": {}
+      "name": "ipD/IPUdp.o",
+      "target_path": "baserom/debug/ip/IPUdp.o",
+      "base_path": "build/debug/ip/IPUdp.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPUuid.o",
-        "target_path": "baserom/debug/ip/IPUuid.o",
-        "base_path": "build/debug/ip/IPUuid.o",
-        "metadata": {}
+      "name": "ipD/IPUuid.o",
+      "target_path": "baserom/debug/ip/IPUuid.o",
+      "base_path": "build/debug/ip/IPUuid.o",
+      "metadata": {}
     },
     {
-        "name": "ipD/IPZero.o",
-        "target_path": "baserom/debug/ip/IPZero.o",
-        "base_path": "build/debug/ip/IPZero.o",
-        "metadata": {}
+      "name": "ipD/IPZero.o",
+      "target_path": "baserom/debug/ip/IPZero.o",
+      "base_path": "build/debug/ip/IPZero.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdeth.o",
-        "target_path": "baserom/release/dvdeth/dvdeth.o",
-        "base_path": "build/release/dvdeth/dvdeth.o",
-        "metadata": {}
+      "name": "dvdeth/dvdeth.o",
+      "target_path": "baserom/release/dvdeth/dvdeth.o",
+      "base_path": "build/release/dvdeth/dvdeth.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdetherror.o",
-        "target_path": "baserom/release/dvdeth/dvdetherror.o",
-        "base_path": "build/release/dvdeth/dvdetherror.o",
-        "metadata": {}
+      "name": "dvdeth/dvdetherror.o",
+      "target_path": "baserom/release/dvdeth/dvdetherror.o",
+      "base_path": "build/release/dvdeth/dvdetherror.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdethFatal.o",
-        "target_path": "baserom/release/dvdeth/dvdethFatal.o",
-        "base_path": "build/release/dvdeth/dvdethFatal.o",
-        "metadata": {}
+      "name": "dvdeth/dvdethFatal.o",
+      "target_path": "baserom/release/dvdeth/dvdethFatal.o",
+      "base_path": "build/release/dvdeth/dvdethFatal.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdethfs.o",
-        "target_path": "baserom/release/dvdeth/dvdethfs.o",
-        "base_path": "build/release/dvdeth/dvdethfs.o",
-        "metadata": {}
+      "name": "dvdeth/dvdethfs.o",
+      "target_path": "baserom/release/dvdeth/dvdethfs.o",
+      "base_path": "build/release/dvdeth/dvdethfs.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdethidutils.o",
-        "target_path": "baserom/release/dvdeth/dvdethidutils.o",
-        "base_path": "build/release/dvdeth/dvdethidutils.o",
-        "metadata": {}
+      "name": "dvdeth/dvdethidutils.o",
+      "target_path": "baserom/release/dvdeth/dvdethidutils.o",
+      "base_path": "build/release/dvdeth/dvdethidutils.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdethlow.o",
-        "target_path": "baserom/release/dvdeth/dvdethlow.o",
-        "base_path": "build/release/dvdeth/dvdethlow.o",
-        "metadata": {}
+      "name": "dvdeth/dvdethlow.o",
+      "target_path": "baserom/release/dvdeth/dvdethlow.o",
+      "base_path": "build/release/dvdeth/dvdethlow.o",
+      "metadata": {}
     },
     {
-        "name": "dvdeth/dvdethqueue.o",
-        "target_path": "baserom/release/dvdeth/dvdethqueue.o",
-        "base_path": "build/release/dvdeth/dvdethqueue.o",
-        "metadata": {}
+      "name": "dvdeth/dvdethqueue.o",
+      "target_path": "baserom/release/dvdeth/dvdethqueue.o",
+      "base_path": "build/release/dvdeth/dvdethqueue.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IFFifo.o",
-        "target_path": "baserom/release/ip/IFFifo.o",
-        "base_path": "build/release/ip/IFFifo.o",
-        "metadata": {}
+      "name": "ip/IFFifo.o",
+      "target_path": "baserom/release/ip/IFFifo.o",
+      "base_path": "build/release/ip/IFFifo.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IFRing.o",
-        "target_path": "baserom/release/ip/IFRing.o",
-        "base_path": "build/release/ip/IFRing.o",
-        "metadata": {}
+      "name": "ip/IFRing.o",
+      "target_path": "baserom/release/ip/IFRing.o",
+      "base_path": "build/release/ip/IFRing.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IP.o",
-        "target_path": "baserom/release/ip/IP.o",
-        "base_path": "build/release/ip/IP.o",
-        "metadata": {}
+      "name": "ip/IP.o",
+      "target_path": "baserom/release/ip/IP.o",
+      "base_path": "build/release/ip/IP.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPArp.o",
-        "target_path": "baserom/release/ip/IPArp.o",
-        "base_path": "build/release/ip/IPArp.o",
-        "metadata": {}
+      "name": "ip/IPArp.o",
+      "target_path": "baserom/release/ip/IPArp.o",
+      "base_path": "build/release/ip/IPArp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPChap.o",
-        "target_path": "baserom/release/ip/IPChap.o",
-        "base_path": "build/release/ip/IPChap.o",
-        "metadata": {}
+      "name": "ip/IPChap.o",
+      "target_path": "baserom/release/ip/IPChap.o",
+      "base_path": "build/release/ip/IPChap.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPDhcp.o",
-        "target_path": "baserom/release/ip/IPDhcp.o",
-        "base_path": "build/release/ip/IPDhcp.o",
-        "metadata": {}
+      "name": "ip/IPDhcp.o",
+      "target_path": "baserom/release/ip/IPDhcp.o",
+      "base_path": "build/release/ip/IPDhcp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPDns.o",
-        "target_path": "baserom/release/ip/IPDns.o",
-        "base_path": "build/release/ip/IPDns.o",
-        "metadata": {}
+      "name": "ip/IPDns.o",
+      "target_path": "baserom/release/ip/IPDns.o",
+      "base_path": "build/release/ip/IPDns.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPEther.o",
-        "target_path": "baserom/release/ip/IPEther.o",
-        "base_path": "build/release/ip/IPEther.o",
-        "metadata": {}
+      "name": "ip/IPEther.o",
+      "target_path": "baserom/release/ip/IPEther.o",
+      "base_path": "build/release/ip/IPEther.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPFrag.o",
-        "target_path": "baserom/release/ip/IPFrag.o",
-        "base_path": "build/release/ip/IPFrag.o",
-        "metadata": {}
+      "name": "ip/IPFrag.o",
+      "target_path": "baserom/release/ip/IPFrag.o",
+      "base_path": "build/release/ip/IPFrag.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPIcmp.o",
-        "target_path": "baserom/release/ip/IPIcmp.o",
-        "base_path": "build/release/ip/IPIcmp.o",
-        "metadata": {}
+      "name": "ip/IPIcmp.o",
+      "target_path": "baserom/release/ip/IPIcmp.o",
+      "base_path": "build/release/ip/IPIcmp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPIgmp.o",
-        "target_path": "baserom/release/ip/IPIgmp.o",
-        "base_path": "build/release/ip/IPIgmp.o",
-        "metadata": {}
+      "name": "ip/IPIgmp.o",
+      "target_path": "baserom/release/ip/IPIgmp.o",
+      "base_path": "build/release/ip/IPIgmp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPIpcp.o",
-        "target_path": "baserom/release/ip/IPIpcp.o",
-        "base_path": "build/release/ip/IPIpcp.o",
-        "metadata": {}
+      "name": "ip/IPIpcp.o",
+      "target_path": "baserom/release/ip/IPIpcp.o",
+      "base_path": "build/release/ip/IPIpcp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPLcp.o",
-        "target_path": "baserom/release/ip/IPLcp.o",
-        "base_path": "build/release/ip/IPLcp.o",
-        "metadata": {}
+      "name": "ip/IPLcp.o",
+      "target_path": "baserom/release/ip/IPLcp.o",
+      "base_path": "build/release/ip/IPLcp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPMisc.o",
-        "target_path": "baserom/release/ip/IPMisc.o",
-        "base_path": "build/release/ip/IPMisc.o",
-        "metadata": {}
+      "name": "ip/IPMisc.o",
+      "target_path": "baserom/release/ip/IPMisc.o",
+      "base_path": "build/release/ip/IPMisc.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPOpt.o",
-        "target_path": "baserom/release/ip/IPOpt.o",
-        "base_path": "build/release/ip/IPOpt.o",
-        "metadata": {}
+      "name": "ip/IPOpt.o",
+      "target_path": "baserom/release/ip/IPOpt.o",
+      "base_path": "build/release/ip/IPOpt.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPPap.o",
-        "target_path": "baserom/release/ip/IPPap.o",
-        "base_path": "build/release/ip/IPPap.o",
-        "metadata": {}
+      "name": "ip/IPPap.o",
+      "target_path": "baserom/release/ip/IPPap.o",
+      "base_path": "build/release/ip/IPPap.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPPPP.o",
-        "target_path": "baserom/release/ip/IPPPP.o",
-        "base_path": "build/release/ip/IPPPP.o",
-        "metadata": {}
+      "name": "ip/IPPPP.o",
+      "target_path": "baserom/release/ip/IPPPP.o",
+      "base_path": "build/release/ip/IPPPP.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPPPPoE.o",
-        "target_path": "baserom/release/ip/IPPPPoE.o",
-        "base_path": "build/release/ip/IPPPPoE.o",
-        "metadata": {}
+      "name": "ip/IPPPPoE.o",
+      "target_path": "baserom/release/ip/IPPPPoE.o",
+      "base_path": "build/release/ip/IPPPPoE.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPRoute.o",
-        "target_path": "baserom/release/ip/IPRoute.o",
-        "base_path": "build/release/ip/IPRoute.o",
-        "metadata": {}
+      "name": "ip/IPRoute.o",
+      "target_path": "baserom/release/ip/IPRoute.o",
+      "base_path": "build/release/ip/IPRoute.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPSocket.o",
-        "target_path": "baserom/release/ip/IPSocket.o",
-        "base_path": "build/release/ip/IPSocket.o",
-        "metadata": {}
+      "name": "ip/IPSocket.o",
+      "target_path": "baserom/release/ip/IPSocket.o",
+      "base_path": "build/release/ip/IPSocket.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPTcp.o",
-        "target_path": "baserom/release/ip/IPTcp.o",
-        "base_path": "build/release/ip/IPTcp.o",
-        "metadata": {}
+      "name": "ip/IPTcp.o",
+      "target_path": "baserom/release/ip/IPTcp.o",
+      "base_path": "build/release/ip/IPTcp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPTcpOutput.o",
-        "target_path": "baserom/release/ip/IPTcpOutput.o",
-        "base_path": "build/release/ip/IPTcpOutput.o",
-        "metadata": {}
+      "name": "ip/IPTcpOutput.o",
+      "target_path": "baserom/release/ip/IPTcpOutput.o",
+      "base_path": "build/release/ip/IPTcpOutput.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPTcpTimer.o",
-        "target_path": "baserom/release/ip/IPTcpTimer.o",
-        "base_path": "build/release/ip/IPTcpTimer.o",
-        "metadata": {}
+      "name": "ip/IPTcpTimer.o",
+      "target_path": "baserom/release/ip/IPTcpTimer.o",
+      "base_path": "build/release/ip/IPTcpTimer.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPTcpTimeWait.o",
-        "target_path": "baserom/release/ip/IPTcpTimeWait.o",
-        "base_path": "build/release/ip/IPTcpTimeWait.o",
-        "metadata": {}
+      "name": "ip/IPTcpTimeWait.o",
+      "target_path": "baserom/release/ip/IPTcpTimeWait.o",
+      "base_path": "build/release/ip/IPTcpTimeWait.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPTcpUser.o",
-        "target_path": "baserom/release/ip/IPTcpUser.o",
-        "base_path": "build/release/ip/IPTcpUser.o",
-        "metadata": {}
+      "name": "ip/IPTcpUser.o",
+      "target_path": "baserom/release/ip/IPTcpUser.o",
+      "base_path": "build/release/ip/IPTcpUser.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPUdp.o",
-        "target_path": "baserom/release/ip/IPUdp.o",
-        "base_path": "build/release/ip/IPUdp.o",
-        "metadata": {}
+      "name": "ip/IPUdp.o",
+      "target_path": "baserom/release/ip/IPUdp.o",
+      "base_path": "build/release/ip/IPUdp.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPUuid.o",
-        "target_path": "baserom/release/ip/IPUuid.o",
-        "base_path": "build/release/ip/IPUuid.o",
-        "metadata": {}
+      "name": "ip/IPUuid.o",
+      "target_path": "baserom/release/ip/IPUuid.o",
+      "base_path": "build/release/ip/IPUuid.o",
+      "metadata": {}
     },
     {
-        "name": "ip/IPZero.o",
-        "target_path": "baserom/release/ip/IPZero.o",
-        "base_path": "build/release/ip/IPZero.o",
-        "metadata": {}
+      "name": "ip/IPZero.o",
+      "target_path": "baserom/release/ip/IPZero.o",
+      "base_path": "build/release/ip/IPZero.o",
+      "metadata": {}
     }
   ]
 }

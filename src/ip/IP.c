@@ -614,7 +614,7 @@ s32 IPOut(IFDatagram* datagram) {
             break;
     }
 
-    datagram->type = 0x0800;
+    datagram->type = ETH_IP;
     (*interface->out)(interface, datagram);
     return 0;
 }

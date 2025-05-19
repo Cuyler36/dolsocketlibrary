@@ -9,6 +9,7 @@ extern "C" {
 
 IPInterface* IPGetRoute(const u8* addr, u8* dst);
 BOOL IPIsBroadcastAddr(IPInterface* interface, const u8* addr);
+BOOL IPIsLoopbackAddr(IPInterface* interface, const u8* addr);
 void IPSetMtu(IPInterface * interface /* r31 */, s32 mtu /* r30 */);
 
 #ifdef __cplusplus

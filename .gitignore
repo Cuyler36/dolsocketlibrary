@@ -24,6 +24,7 @@ dolphin/include/dolphin/*
 libc/
 
 # Keep SocketLib SDK
+!dolphin/include/dolphin/ip.h
 !dolphin/include/dolphin/
 !dolphin/include/dolphin/ip/
 !dolphin/include/dolphin/ip/**
