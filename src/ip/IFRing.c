@@ -120,29 +120,16 @@ static s32 MargeBlock(u8* ptr /* r23 */, s32 len /* r24 */, IFBlock* blockTable 
     ASSERTLINE(318, 1 < maxblock && blockTable);
     ASSERTLINE(319, 0 <= len);
 
-    if (tail <= ptr) {
-        pl = (s32)ptr - (s32)tail;
-    } else {
-        pl = (s32)ptr + size - (s32)tail;
-    }
-
+    pl = tail <= ptr ? (s32)ptr - (s32)tail : (s32)ptr + size - (s32)tail;
     pr = pl + len;
     end = blockTable + maxblock;
     if (tail == ptr) {
         block = blockTable;
 
         while (block < end && block->ptr) {
-            if (tail <= block->ptr) {
-                pb = (s32)block->ptr - (s32)tail;
-            } else {
-                pb = (s32)block->ptr + size - (s32)tail;
-            }
-
+            pb = tail <= block->ptr ? (s32)block->ptr - (s32)tail : (s32)block->ptr + size - (s32)tail;
             if (pb <= pr) {
-                if (pb + block->len > pr) {
-                    pr = pb + block->len;
-                }
-
+                pr = pb + block->len > pr ? pb + block->len : pr;
                 len = pr - pl;
                 memmove(block, block + 1, (s32)end - (s32)(block + 1));
                 memset(end - 1, 0, sizeof(IFBlock));
@@ -155,16 +142,9 @@ static s32 MargeBlock(u8* ptr /* r23 */, s32 len /* r24 */, IFBlock* blockTable 
     } else {
         block = blockTable;
         while (block < end && block->ptr) {
-            if (tail <= block->ptr) {
-                pb = (s32)block->ptr - (s32)tail;
-            } else {
-                pb = (s32)block->ptr + size - (s32)tail;
-            }
-
+            pb = tail <= block->ptr ? (s32)block->ptr - (s32)tail : (s32)block->ptr + size - (s32)tail;
             if (pl <= pb + block->len && pb <= pr) {
-                if (pb + block->len > pr) {
-                    pr = pb + block->len;
-                }
+                pr = pb + block->len > pr ? pb + block->len : pr;
 
                 if (pb < pl) {
                     pl = pb;
@@ -202,4 +182,39 @@ u8* IFRingInEx(u8* buf /* r21 */, s32 size /* r27 */, u8* head /* r28 */, s32 us
     u8* ptr; // r31
     s32 len; // r29
     s32 free; // r24
+
+    len = *adv;
+    if (len == 0) {
+        return head;
+    }
+
+    ASSERTLINE(397, 0 <= offset);
+    ASSERTLINE(398, used + offset + len <= size);
+    end = buf + size;
+    ASSERTLINE(400, buf <= head && head < end);
+    tail = head + used;
+    if (end <= tail) {
+        tail -= size;
+    }
+
+    ASSERTLINE(407, offset < size);
+    ptr = tail + offset;
+    if (end <= ptr) {
+        ptr -= size;
+    }
+
+    if (head <= ptr) {
+        free = (s32)end - (s32)ptr;
+        if (len <= free) {
+            memmove(ptr, data, len);
+        } else {
+            memmove(ptr, data, free);
+            memmove(buf, data + free, len - free);
+        }
+    } else {
+        memmove(ptr, data, len);
+    }
+
+    *adv = MargeBlock(ptr, len, blockTable, maxblock, size, tail);
+    return head;
 }
