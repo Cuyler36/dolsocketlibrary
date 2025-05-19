@@ -1,0 +1,36 @@
+# VS Code
+.vscode/
+
+# Built libraries
+*.a
+
+# Build artifacts
+build/
+
+# Local binary executables
+tools/dtk
+objdiff
+*.exe
+
+# Compiler
+mwcc_compiler/*
+
+# Original files
+baserom/*
+
+# Dolphin SDK
+dolphin/include/*
+dolphin/include/dolphin/*
+libc/
+
+# Keep SocketLib SDK
+!dolphin/include/dolphin/
+!dolphin/include/dolphin/ip/
+!dolphin/include/dolphin/ip/**
+!dolphin/include/dolphin/private/
+!dolphin/include/dolphin/private/**
+!dolphin/include/dolphin/dvdeth/
+!dolphin/include/dolphin/dvdeth/**
+
+# Keep .gitkeep
+!**/.gitkeep
