@@ -20,14 +20,14 @@ struct IFQueue {
 #define IFIsEmptyQueue(queue) ((queue)->next == 0)
 
 #define IFQueueIterator(type, queue, iter, n) \
-    for ((iter) = (type)((queue)->next), (n) = ((iter) == 0) ? 0 : (type)(iter)->link.next; \
-         (iter) != 0; \
-         (iter) = (n), (n) = ((iter) == 0) ? 0 : (type)(iter)->link.next)
+    for ((iter) = (type)((queue)->next), (n) = ((iter) == NULL) ? NULL : (type)(iter)->link.next; \
+         (iter) != NULL; \
+         (iter) = (n), (n) = ((iter) == NULL) ? NULL : (type)(iter)->link.next)
 
 #define IFQueueReverseIterator(type, queue, iter, p) \
-    for ((iter) = (type)((queue)->prev), (p) = ((iter) == 0) ? 0 : (type)(iter)->link.prev; \
-         (iter) != 0; \
-         (iter) = (p), (p) = ((iter) == 0) ? 0 : (type)(iter)->link.prev)
+    for ((iter) = (type)((queue)->prev), (p) = ((iter) == NULL) ? NULL : (type)(iter)->link.prev; \
+         (iter) != NULL; \
+         (iter) = (p), (p) = ((iter) == NULL) ? NULL : (type)(iter)->link.prev)
 
 #define IFQueueDequeueEntry(type, queue, entry) \
 do {                                            \
@@ -183,7 +183,7 @@ do {                                                    \
 do {                                                    \
     register IFQueue* ___prev;                           \
                                                         \
-    ___prev = (queue)->next;                             \
+    ___prev = (queue)->prev;                             \
                                                         \
     if (___prev == 0) {                               \
         (queue)->next = (IFQueue*)(entry);              \

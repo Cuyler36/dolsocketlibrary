@@ -8,7 +8,41 @@
 extern "C" {
 #endif
 
-#define TCP_STATE_LISTEN 1
+#define TCP_STATE_CLOSED       0
+#define TCP_STATE_LISTEN       1
+#define TCP_STATE_SYN_SENT     2
+#define TCP_STATE_SYN_RECEIVED 3
+#define TCP_STATE_ESTABLISHED  4
+#define TCP_STATE_FIN_WAIT1    5
+#define TCP_STATE_FIN_WAIT2    6
+#define TCP_STATE_CLOSE_WAIT   7
+#define TCP_STATE_CLOSING      8
+#define TCP_STATE_LAST_ACK     9
+#define TCP_STATE_TIME_WAIT    10
+
+#define TCP_MIN_HLEN 20
+#define TCP_MAX_HLEN 60
+#define TCP_HLEN(tcp) (((tcp)->flag & 0xF000) >> 10)
+
+#ifndef MIN
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#endif
+#ifndef MAX
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
+
+#define TCP_OPT_EOL            0
+#define TCP_OPT_NOP            1
+#define TCP_OPT_MSS            2
+#define TCP_OPT_WS             3
+#define TCP_OPT_SACK_PERMITTED 4
+#define TCP_OPT_SACK           5
+
+// NOTE: argument order as used by the SDK asserts: TCP_SEQ_GT(a, b) is true when b is after a.
+#define TCP_SEQ_LT(a, b) ((s32)((b) - (a)) < 0)
+#define TCP_SEQ_LE(a, b) ((s32)((b) - (a)) <= 0)
+#define TCP_SEQ_GT(a, b) ((s32)((b) - (a)) > 0)
+#define TCP_SEQ_GE(a, b) ((s32)((b) - (a)) >= 0)
 
 #define TCP_FLAG_FIN (1 << 0)
 #define TCP_FLAG_SYN (1 << 1)
@@ -36,6 +70,15 @@ typedef struct TCPSackHole {
     int dupAcks; // offset 0x8, size 0x4
     s32 rxmit; // offset 0xC, size 0x4
 } TCPSackHole;
+
+typedef struct TCPStatistics {
+    // total size: 0x14
+    u32 sendTotal; // offset 0x0, size 0x4
+    u32 recvTotal; // offset 0x4, size 0x4
+    u32 rxmitTimeout; // offset 0x8, size 0x4
+    u32 rxmitPackets; // offset 0xC, size 0x4
+    u32 rxmitBytes; // offset 0x10, size 0x4
+} TCPStatistics;
 
 typedef struct TCPInfo TCPInfo;
 typedef void (*TCPCallback)(TCPInfo*, s32);
@@ -138,8 +181,88 @@ struct TCPInfo {
     void* node; // offset 0x358, size 0x4
 };
 
+// IPTcp.c
+s32 TCPIsn(IPInfo* info);
 u16 TCPCheckSum(IFVec* vec, s32 nVec);
+void TCPDumpHeader(const IPHeader* ip, const TCPHeader* tcp);
+s32 TCPGetSegmentLength(IPHeader* ip, TCPHeader* tcp);
+void TCPRespond(IPInterface* interface, TCPInfo* info, u8* dstAddr, u16 dst, u8* srcAddr, u16 src, s32 seq, s32 ack, u16 flag, u16 win);
 void TCPIn(IPInterface * interface /* r28 */, IPHeader * ip /* r29 */, u32 flag);
+s32 TCPSendIn(TCPInfo* info, BOOL nonblock);
+s32 TCPPeekOut(TCPInfo* info, void* ptr, s32 len, BOOL peek, BOOL* urgent);
+s32 TCPRecvOut(TCPInfo* info, BOOL* urgent);
+void TCPNotify(IPHeader* ip, const u8* gateway, s32 err);
+void TCPSourceQuench(IPHeader* ip, const u8* gateway);
+void TCPDeleteSackHoles(TCPInfo* info, TCPHeader* tcp);
+void TCPUpdateScoreboard(TCPInfo* info, TCPHeader* tcp, u8* opt, int optlen);
+BOOL __TCPTrimSegment(TCPInfo* info, IPHeader* ip, u16* flag);
+
+// IPTcpTimeWait.c
+BOOL TCPTestTimeWait(IPInterface* interface, IPHeader* ip, TCPHeader* tcp);
+void TCPStartTimeWait(IPInterface* interface, TCPInfo* info);
+
+// IPTcpOutput.c
+TCPSackHole* TCPSackOutput(const TCPInfo* info);
+int TCPMakeOption(TCPHeader* tcp, TCPInfo* info, u16 flag);
+void TCPOutput(TCPInfo* info, u16 flag);
+s32 __TCPCalcSendSize(TCPInfo* info, s32 effSendMss, u16* pflag);
+
+// IPTcpTimer.c
+void TCPStartRxmitTimer(TCPInfo* info);
+void TCPStopRxmitTimer(TCPInfo* info, TCPHeader* tcp); // 2nd param unused (IPTcp.c passes tcp in r4)
+void TCPCancelRxmitTimer(TCPInfo* info);
+void TCPUpdateRtt(TCPInfo* info, OSTime rtt);
+void TCPInitRtt(TCPInfo* info);
+
+// IPTcpUser.c
+void TCPEnumInfoQueue(TCPCallback callback);
+TCPInfo* TCPLookupInfo(IPHeader* ip, TCPHeader* tcp);
+s32 TCPGetStatus(TCPInfo* info);
+s32 TCPGetRemoteSocket(TCPInfo* info, IPSocket* socket);
+s32 TCPGetLocalSocket(TCPInfo* info, IPSocket* socket);
+s32 TCPBind(TCPInfo* info, const IPSocket* socket);
+BOOL TCPAbort(TCPInfo* info);
+s32 TCPSetSendBuff(TCPInfo* info, void* sendbuf, s32 sendbufLen);
+s32 TCPSetRecvBuff(TCPInfo* info, void* recvbuf, s32 recvbufLen);
+s32 TCPGetSendBuff(TCPInfo* info, void* sendbuf, s32* sendbufLen);
+s32 TCPGetRecvBuff(TCPInfo* info, void* recvbuf, s32* recvbufLen);
+s32 TCPOpen(TCPInfo* info, void* sendbuf, s32 sendbufLen, void* recvbuf, s32 recvbufLen);
+s32 TCPListen(TCPInfo* info, IPSocket* local, IPSocket* remote, int (*callback)(TCPInfo*, s32), s32* result);
+s32 TCPAcceptAsync(TCPInfo* info, TCPInfo* listening, TCPCallback callback, s32* result);
+s32 TCPAccept(TCPInfo* info, TCPInfo* listening);
+s32 TCPConnectAsync(TCPInfo* info, const IPSocket* socket, TCPCallback callback, s32* result);
+s32 TCPConnect(TCPInfo* info, const IPSocket* socket);
+s32 TCPSendAsync(TCPInfo* info, void* data, s32 len, TCPCallback callback, s32* result);
+s32 TCPSendNonblock(TCPInfo* info, void* data, s32 len);
+s32 TCPSendUrgAsync(TCPInfo* info, void* data, s32 len, TCPCallback callback, s32* result);
+s32 TCPSendUrgNonblock(TCPInfo* info, void* data, s32 len);
+s32 TCPSend(TCPInfo* info, void* data, s32 len);
+s32 TCPSendUrg(TCPInfo* info, void* data, s32 len);
+s32 TCPReceiveExAsync(TCPInfo* info, void* data, s32 len, u32 flag, TCPCallback callback, s32* result);
+s32 TCPReceiveEx(TCPInfo* info, void* data, s32 len, u32 flag);
+s32 TCPReceiveAsync(TCPInfo* info, void* data, s32 len, TCPCallback callback, s32* result);
+s32 TCPReceiveNonblock(TCPInfo* info, void* data, s32 len);
+s32 TCPReceive(TCPInfo* info, void* data, s32 len);
+s32 TCPPeek(TCPInfo* info, void* data, s32 len);
+s32 TCPCloseAsync(TCPInfo* info, TCPCallback callback, s32* result);
+s32 TCPClose(TCPInfo* info);
+s32 TCPShutdown(TCPInfo* info, u32 flag);
+s32 TCPCancel(TCPInfo* info);
+s32 TCPReceiveUrgExAsync(TCPInfo* info, void* data, s32 len, u32 flag, TCPCallback callback, s32* result);
+s32 TCPReceiveUrgAsync(TCPInfo* info, void* data, s32 len, TCPCallback callback, s32* result);
+s32 TCPReceiveUrgNonblock(TCPInfo* info, void* data, s32 len);
+s32 TCPReceiveUrgEx(TCPInfo* info, void* data, s32 len, u32 flags);
+s32 TCPReceiveUrg(TCPInfo* info, void* data, s32 len);
+s32 TCPPeekUrg(TCPInfo* info, void* data, s32 len);
+s32 TCPGetUrgOffset(TCPInfo* info);
+s32 TCPGetSockOpt(TCPInfo* info, int level, int optname, void* optval, int* optlen);
+s32 TCPSetSockOpt(TCPInfo* info, int level, int optname, void* optval, int optlen);
+s32 TCPSetTimeout(TCPInfo* info, OSTime threshold);
+s32 TCPControlNagle(TCPInfo* info, BOOL enable);
+s32 TCPSetUrgInLine(TCPInfo* info, BOOL inLine);
+s32 TCPSetOption(TCPInfo* info, u8 ttl, u8 tos);
+BOOL TCPOnReset(BOOL final);
+s16 __TCPPoll(TCPInfo* info);
 
 #ifdef __cplusplus
 }

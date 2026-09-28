@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#define UDP_HLEN 8
+
 typedef struct UDPHeader {
     // total size: 0x8
     u16 src; // offset 0x0, size 0x2
@@ -44,7 +46,34 @@ struct UDPInfo {
 };
 
 u16 UDPCheckSum(IFVec* vec, s32 nVec);
-void UDPIn(IPInterface * interface /* r25 */, struct IPHeader * ip /* r30 */, unsigned long flag /* r27 */);
+void UDPNotify(IPHeader* ip, const u8* gateway, s32 err);
+void UDPIn(IPInterface* interface, IPHeader* ip, u32 flag);
+BOOL UDPOnReset(BOOL final);
+s32 UDPGetRemoteSocket(UDPInfo* info, IPSocket* socket);
+s32 UDPGetLocalSocket(UDPInfo* info, IPSocket* socket);
+s32 UDPSetOption(UDPInfo* info, u8 ttl, u8 tos);
+s32 UDPConnect(UDPInfo* info, const IPSocket* socket);
+s32 UDPGetRecvBuff(UDPInfo* info, void* recvbuf, s32* recvbufLen);
+s32 UDPSetRecvBuff(UDPInfo* info, void* recvbuf, s32 recvbufLen);
+s32 UDPGetSendBuff(UDPInfo* info, void* sendbuf, s32* sendbufLen);
+s32 UDPSetSendBuff(UDPInfo* info, void* sendbuf, s32 sendbufLen);
+s32 UDPOpen(UDPInfo* info, void* recvbuf, s32 recvbufLen);
+s32 UDPBind(UDPInfo* info, const IPSocket* socket);
+s32 UDPSendAsync(UDPInfo* info, void* data, s32 len, const IPSocket* remote, UDPCallback callback, s32* result);
+s32 UDPSend(UDPInfo* info, void* data, s32 len, const IPSocket* remote);
+s32 UDPReceiveExAsync(UDPInfo* info, void* data, s32 len, IPSocket* local, IPSocket* remote, u32 flag, UDPCallback callback, s32* result);
+s32 UDPReceiveAsync(UDPInfo* info, void* data, s32 len, IPSocket* local, IPSocket* remote, UDPCallback callback, s32* result);
+s32 UDPReceiveNonblock(UDPInfo* info, void* data, s32 len, IPSocket* local, IPSocket* remote);
+s32 UDPReceiveEx(UDPInfo* info, void* data, s32 len, IPSocket* local, IPSocket* remote, u32 flag);
+s32 UDPReceive(UDPInfo* info, void* data, s32 len, IPSocket* local, IPSocket* remote);
+s32 UDPPeek(UDPInfo* info, void* data, s32 len, IPSocket* local, IPSocket* remote);
+s32 UDPCancel(UDPInfo* info);
+s32 UDPClose(UDPInfo* info);
+s32 UDPGetSockOpt(UDPInfo* info, int level, int optname, void* optval, int* optlen);
+s32 UDPSetSockOpt(UDPInfo* info, int level, int optname, void* optval, int optlen);
+s16 __UDPPoll(UDPInfo* info);
+
+extern IFQueue UDPInfoQueue;
 
 #ifdef __cplusplus
 }

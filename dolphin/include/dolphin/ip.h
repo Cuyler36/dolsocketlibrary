@@ -17,6 +17,7 @@
 #include <dolphin/ip/IPPpp.h>
 #include <dolphin/ip/IPDhcp.h>
 #include <dolphin/ip/IPEther.h>
+#include <dolphin/ip/IPPPPoE.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,6 +26,7 @@ extern "C" {
 #define IPU32(ipBytes) (*(u32*)(ipBytes))
 #define IPEQ(ip0, ip1) (IPU32(ip0) == IPU32(ip1))
 #define IPNEQ(ip0, ip1) (IPU32(ip0) != IPU32(ip1))
+#define IP_ADDR_EQ(ip0, ip1) IPEQ(ip0, ip1)
 
 #define IP_CLASSA(ip) (((ip)[0] & 0x80) == 0x00) /*   0 - 127 */
 #define IP_CLASSB(ip) (((ip)[0] & 0xC0) == 0x80) /* 128 - 191 */
@@ -33,12 +35,18 @@ extern "C" {
 #define IP_CLASSE(ip) (((ip)[0] & 0xF8) == 0xF0) /* 240 - 255 | Experimental */
 
 extern const u8 IPAddrAny[4];
+extern const u8 IPLoopbackAddr[4];
 
 char* IPAtoN(const char* dotted, u8* addr);
 char* IPNtoA(const u8* addr);
 BOOL IPRecoverGateway(const u8* dst);
 BOOL IPAutoConfig(void);
+void IPAutoStop(void);
 s32 IPSetConfigError(IPInterface* interface, s32 err);
+
+// IPMisc.c
+int stricmp(const char* s1, const char* s2);
+int strnicmp(const char* s1, const char* s2, u32 n);
 
 #ifdef __cplusplus
 }

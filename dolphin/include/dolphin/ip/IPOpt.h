@@ -14,7 +14,10 @@ extern "C" {
 #define IP_OPT_JOIN_MCAST 11
 #define IP_OPT_LEAVE_MCAST 12
 
+void IPSwapAddr(u8* a, u8* b);
 s32 IPProcessSourceRoute(IPHeader* ip);
+s32 IPReverseSourceRoute(IPHeader* ip);
+s32 IPUpdateRecordRoute(IPHeader* ip, u8* addr);
 
 #ifdef __cplusplus
 }

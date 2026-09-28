@@ -10,7 +10,9 @@ extern "C" {
 
 #define SO_MTU_MAX 1500
 
-#define SO_GET_CONFIG_MTU(config) ((config)->mtu >= SO_MTU_MAX ? SO_MTU_MAX : (config)->mtu)
+#define SO_INADDR_ANY ((u32)0x00000000)
+
+#define SO_GET_CONFIG_MTU(config) ((config)->mtu > SO_MTU_MAX ? SO_MTU_MAX : (config)->mtu)
 
 typedef struct SOInAddr {
     // total size: 0x4
@@ -109,6 +111,61 @@ typedef struct SOPollFD {
 } SOPollFD;
 
 s32 SOGetHostID();
+
+typedef struct SOAddrInfo {
+    // total size: 0x20
+    int flags; // offset 0x0, size 0x4
+    int family; // offset 0x4, size 0x4
+    int sockType; // offset 0x8, size 0x4
+    int protocol; // offset 0xC, size 0x4
+    unsigned int addrLen; // offset 0x10, size 0x4
+    char* canonName; // offset 0x14, size 0x4
+    void* addr; // offset 0x18, size 0x4
+    struct SOAddrInfo* next; // offset 0x1C, size 0x4
+} SOAddrInfo;
+
+void* SOAlloc(u32 name, s32 size);
+void SOFree(u32 name, void* ptr, s32 size);
+int SOInetPtoN(int af, const char* src, void* dst);
+char* SOInetNtoP(int af, void* src, char* dst, u32 len);
+int SOGetAddrInfoAsync(const char* nodeName, const char* servName, const SOAddrInfo* hints, DNSCommand* cmd, u8* addrList, DNSCallback callback, int* result);
+int SOGetAddrInfo(const char* nodeName, const char* servName, const SOAddrInfo* hints, SOAddrInfo** res);
+void SOFreeAddrInfo(SOAddrInfo* head);
+void __IPWakeupPollingThreads(void);
+int SOGetNameInfo(void* sa, char* node, unsigned int nodeLen, char* service, unsigned int serviceLen, int flags);
+int SOSetResolver(const SOInAddr* dns1, const SOInAddr* dns2);
+int SOGetResolver(SOInAddr* dns1, SOInAddr* dns2);
+u32 SONtoHl(u32 netlong);
+u16 SONtoHs(u16 netshort);
+u32 SOHtoNl(u32 hostlong);
+u16 SOHtoNs(u16 hostshort);
+int SOInetAtoN(const char* cp, SOInAddr* inp);
+char* SOInetNtoA(SOInAddr in);
+void SOInit(void);
+int SOStartup(const SOConfig* config);
+int SOCleanup(void);
+int SOSocket(int af, int type, int protocol);
+int SOClose(int s);
+int SOListen(int s, int backlog);
+int SOAccept(int s, void* sockAddr);
+int SOBind(int s, void* sockAddr);
+int SOConnect(int s, void* sockAddr);
+int SOGetPeerName(int s, void* sockAddr);
+int SOGetSockName(int s, void* sockAddr);
+int SOShutdown(int s, int how);
+int SORead(int s, void* buf, int len);
+int SORecv(int s, void* buf, int len, int flags);
+int SORecvFrom(int s, void* buf, int len, int flags, void* sockFrom);
+int SOWrite(int s, void* buf, int len);
+int SOSend(int s, void* buf, int len, int flags);
+int SOSendTo(int s, void* buf, int len, int flags, void* sockTo);
+int SOSockAtMark(int s);
+int SOGetSockOpt(int s, int level, int optname, void* optval, int* optlen);
+int SOSetSockOpt(int s, int level, int optname, void* optval, int optlen);
+int SOFcntl(int s, int cmd, ...);
+SOHostEnt* SOGetHostByName(const char* name);
+SOHostEnt* SOGetHostByAddr(void* addr, int len, int type);
+int SOPoll(SOPollFD* fds, u32 nfds, OSTime timeout);
 
 #ifdef __cplusplus
 }

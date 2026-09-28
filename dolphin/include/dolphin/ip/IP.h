@@ -10,6 +10,15 @@ extern "C" {
 #endif
 
 #define IP_SOCKLEN 8
+#define IP_ALEN 4
+
+#ifndef IP_ERR_NONE
+#define IP_ERR_NONE 0
+#endif
+#ifndef IP_ERR_BUSY
+#define IP_ERR_BUSY (-1)
+#endif
+#define IP_MIN_HLEN 20
 #define IF_MAX_VEC 4
 
 #define IP_HLEN(ip) (((ip)->verlen & 0xF) << 2)
@@ -136,6 +145,20 @@ typedef struct IPHeader {
 
 char* IPNtoA(const u8* addr);
 void IFInitDatagram(IFDatagram* datagram, u16 type, int nVec);
+s32 IPOut(IFDatagram* datagram);
+u16 IPCheckSum(IPHeader* ip);
+void IPIn(IPInterface* interface, IPHeader* ip, s32 len, u32 flag);
+IPInfo* IPLookupInfo(IFQueue* queue, u8* srcAddr, u8* dstAddr, u16 src, u16 dst, u32 flag);
+BOOL __IPIsMember(IFQueue* queue, IPInfo* info);
+BOOL IPBind(IFQueue* queue, IPInfo* info, const IPSocket* socket, BOOL reuse);
+u16 IPGetAnonPort(IFQueue* queue, u16* last);
+s32 IPConnect(IFQueue* queue, IPInfo* info, const IPSocket* socket, u16* last);
+s32 IPGetRemoteSocket(IPInfo* info, IPSocket* socket);
+s32 IPGetLocalSocket(IPInfo* info, IPSocket* socket);
+s32 IPGetSockOpt(IPInfo* info, int level, int optname, void* optval, int* optlen);
+s32 IPSetSockOpt(IPInfo* info, int level, int optname, void* optval, int optlen);
+BOOL IPSetOption(IPInfo* info, u8 ttl, u8 tos);
+void IPCancel(IFDatagram* datagram);
 
 #ifdef __cplusplus
 }

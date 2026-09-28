@@ -136,7 +136,7 @@ static void Revalidate(ARPCache* cache /* r31 */) {
         case 0:
         default:
             break;
-        case ARP_CACHE_RESOVLED:
+        case ARP_CACHE_RESOLVED:
             cache->state = ARP_CACHE_POLLING;
             cache->rxmit = 1;
         // fallthrough
@@ -214,7 +214,7 @@ static ARPCache* Lookup(u8* prAddr /* r3 */) {
 
     IFQueueIterator(ARPCache*, &Up, ent, next) {
         if (IPEQ(ent->prAddr, prAddr)) {
-            if (ent->state == ARP_CACHE_RESOVLED || ent->state == ARP_CACHE_POLLING) {
+            if (ent->state == ARP_CACHE_RESOLVED || ent->state == ARP_CACHE_POLLING) {
                 return ent;
             }
         }
@@ -335,8 +335,8 @@ void ARPAdd(IPInterface* interface /* r1+0x8 */, u8* prAddr /* r1+0xC */, u8* hw
 
     cache = ARPAlloc(prAddr, TRUE);
     if (cache) {
-        ASSERTLINE(465, cache->state != ARP_CACHE_RESOVLED && cache->state != ARP_CACHE_POLLING);
-        cache->state = ARP_CACHE_RESOVLED;
+        ASSERTLINE(465, cache->state != ARP_CACHE_RESOLVED && cache->state != ARP_CACHE_POLLING);
+        cache->state = ARP_CACHE_RESOLVED;
         cache->interface = interface;
         cache->rxmit = 1200;
         OSSetAlarm(&cache->alarm, OSSecondsToTicks((OSTime)cache->rxmit), TimeoutCallback);
@@ -364,7 +364,7 @@ void ARPHold(IPInterface* interface /* r29 */, struct IFDatagram * datagram /* r
     datagram->queue = NULL;
     free = ARPAlloc(datagram->dst, TRUE);
     ASSERTLINE(495, free);
-    ASSERTLINE(496, free->state != ARP_CACHE_RESOVLED && free->state != ARP_CACHE_POLLING);
+    ASSERTLINE(496, free->state != ARP_CACHE_RESOLVED && free->state != ARP_CACHE_POLLING);
     state = free->state;
     free->state = 1;
     free->interface = interface;
@@ -418,7 +418,7 @@ static void ARPUpdate(IPInterface* interface /* r27 */, ARPHeader* arp /* r29 */
         cache->rxmit = 1200;
         OSSetAlarm(&cache->alarm, OSSecondsToTicks((OSTime)cache->rxmit), TimeoutCallback);
         state = cache->state;
-        cache->state = ARP_CACHE_RESOVLED;
+        cache->state = ARP_CACHE_RESOLVED;
         memmove(cache->hwAddr, ARPHeader2MACAddr(arp), 6);
         if (cache->interface != interface) {
             DiscardPendingPackets(cache, -2);
@@ -647,7 +647,7 @@ static BOOL DetectCollision(IPInterface* interface /* r29 */, ARPHeader* arp /* 
 }
 
 // // Range: 0x1978 -> 0x1AEC
-void ARPIn(IPInterface* interface /* r30 */, ETHHeader* eh /* r1+0xC */, s32 len /* r29 */) {
+void ARPIn(IPInterface* interface /* r30 */, ETHHeader* eh /* r1+0xC */, s32 len /* r29 */, u32) {
     // Local variables
     ARPHeader* arp; // r31
 

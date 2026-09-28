@@ -14,7 +14,7 @@ extern "C" {
 #define ARP_MULTICAST 3
 #define ARP_NOTFOUND -1
 
-#define ARP_CACHE_RESOVLED 2
+#define ARP_CACHE_RESOLVED 2
 #define ARP_CACHE_POLLING 3
 
 typedef struct ARPCache {
@@ -56,7 +56,7 @@ void ARPOut(IPInterface* interface, u16 opCode, const u8* dstPrAddr, const u8* d
 void ARPGratuitous(IPInterface* interface);
 void ARPProbe(IPInterface* interface, u8* prAddr);
 void ARPClaim(IPInterface* interface, IPInterfaceConf* conf);
-void ARPIn(IPInterface* interface, ETHHeader* eh, s32 len);
+void ARPIn(IPInterface* interface, ETHHeader* eh, s32 len, u32 flag);
 void ARPRefresh(void);
 
 #ifdef __cplusplus

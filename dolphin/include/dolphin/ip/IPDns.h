@@ -11,6 +11,16 @@ extern "C" {
 typedef struct DNSCommand DNSCommand;
 typedef struct DNSInfo DNSInfo;
 
+typedef struct DNSHeader {
+    // total size: 0xC
+    u16 id; // offset 0x0, size 0x2
+    u16 flags; // offset 0x2, size 0x2
+    u16 qdcount; // offset 0x4, size 0x2
+    u16 ancount; // offset 0x6, size 0x2
+    u16 nscount; // offset 0x8, size 0x2
+    u16 arcount; // offset 0xA, size 0x2
+} DNSHeader;
+
 typedef s32 (*DNSPreCallback)(DNSInfo*, DNSCommand*);
 typedef void (*DNSPostCallback)(DNSCommand*, s32);
 typedef void (*DNSCallback)(DNSInfo*, s32);
@@ -90,6 +100,14 @@ struct DNSInfo {
 s32 DNSClose(DNSInfo * info /* r31 */);
 s32 DNSOpen(DNSInfo * info /* r1+0x8 */, const unsigned char * addr /* r1+0xC */);
 s32 DNSOpen2(DNSInfo * info /* r31 */, const unsigned char * dns1 /* r27 */, const unsigned char * dns2 /* r28 */);
+void DNSDumpPacket(DNSHeader* dns);
+void DNSGo(DNSInfo* info, DNSCommand* cmd);
+s32 DNSGetAddrAsync(DNSInfo* info, const char* name, u8* addr, s32 addrLen, DNSCallback callback, s32* result);
+s32 DNSGetAddr(DNSInfo* info, const char* name, u8* addr, s32 addrLen);
+s32 DNSGetNameAsync(DNSInfo* info, const u8* addr, char* name, DNSCallback callback, s32* result);
+s32 DNSGetName(DNSInfo* info, const u8* addr, char* name);
+s32 DNSLookupAsync(DNSInfo* info, const u8* query, s32 queryLen, u8* response, s32 responseLen, DNSCallback callback, s32* result);
+s32 DNSLookup(DNSInfo* info, const u8* query, s32 queryLen, u8* response, s32 responseLen);
 
 #ifdef __cplusplus
 }
