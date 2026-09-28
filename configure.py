@@ -68,6 +68,19 @@ OBJDIFF_TAG = "v3.8.1"
 WIBO_TAG = "0.6.11"
 COMPILER_VERSION = "GC/1.2.5n"
 
+# decomp.me compiler id for COMPILER_VERSION (used by objdiff's "decomp.me" button)
+SCRATCH_COMPILER = "mwcc_233_163n"
+
+# Include directories, for context (.ctx) generation for decomp.me scratches.
+CTX_INCLUDE_DIRS = ["dolphin/include/libc", "dolphin/include", "src"]
+
+
+def scratch_cflags(flags: List[str]) -> str:
+    # decomp.me has no access to our include tree; the .ctx file replaces it.
+    def keep(flag: str) -> bool:
+        return not (flag.startswith("-I") or flag.startswith("-i ") or flag.startswith("-ir "))
+    return " ".join(f for f in flags if keep(f))
+
 
 def is_windows() -> bool:
     return os.name == "nt"
@@ -168,6 +181,16 @@ def main() -> None:
     )
     n.newline()
 
+    n.comment("Context files for decomp.me scratches")
+    n.rule(
+        name="decompctx",
+        command=f"{python} tools/decompctx.py $in -o $out -d $out.d $includes",
+        description="CTX $in",
+        depfile="$out.d",
+        deps="gcc",
+    )
+    n.newline()
+
     n.rule(
         name="ar",
         command=f"{python} tools/mkar.py $out $in",
@@ -234,7 +257,22 @@ def main() -> None:
                         "progress_categories": [lib, cfg],
                     },
                 }
+                unit_cfg["scratch"] = {
+                    "platform": "gc_wii",
+                    "compiler": SCRATCH_COMPILER,
+                    "c_flags": scratch_cflags(CFLAGS_BASE + cfg_info["cflags"]),
+                }
                 if has_src:
+                    ctx = base.with_suffix(".ctx")
+                    n.build(
+                        outputs=ctx,
+                        rule="decompctx",
+                        inputs=src,
+                        implicit="tools/decompctx.py",
+                        variables={"includes": " ".join(f"-I {d}" for d in CTX_INCLUDE_DIRS)},
+                    )
+                    unit_cfg["scratch"]["ctx_path"] = serialize_path(ctx)
+                    unit_cfg["scratch"]["build_ctx"] = True
                     unit_cfg["base_path"] = serialize_path(base)
                     unit_cfg["metadata"]["source_path"] = serialize_path(src)
                 objdiff_units.append(unit_cfg)

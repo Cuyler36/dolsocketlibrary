@@ -198,10 +198,11 @@ int CHAPTimeout(PPPConf* conf /* r31 */) {
 
     expired = FALSE;
     switch (conf->state) {
-        case PPP_STATE_STOPPED:
-        case PPP_STATE_CLOSING:
         case PPP_STATE_STOPPING:
         case PPP_STATE_REQ_SENT:
+        case PPP_STATE_OPENED:
+        case PPP_STATE_CLOSED:
+        case PPP_STATE_STARTING:
             break;
         case PPP_STATE_ACK_RCVD:
             if (conf->configure <= 0) {
@@ -216,8 +217,6 @@ int CHAPTimeout(PPPConf* conf /* r31 */) {
                 PPPSetState(conf, PPP_STATE_CLOSED);
                 PPPLayerFinished(conf);
             }
-            break;
-        case PPP_STATE_OPENED:
             break;
     }
 

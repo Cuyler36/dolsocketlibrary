@@ -240,13 +240,8 @@ int PAPTimeout(PPPConf* conf /* r31 */) {
                 PPPLayerFinished(conf);
             }
             break;
-        case PPP_STATE_STOPPED:
-            (void)0;
-            break;
-        case PPP_STATE_CLOSING:
-        case PPP_STATE_STOPPING:
-            (void)0;
-            break;
+        case PPP_STATE_STARTING:
+        case PPP_STATE_CLOSED:
         case PPP_STATE_OPENED:
             break;
     }

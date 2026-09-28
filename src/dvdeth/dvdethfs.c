@@ -679,7 +679,7 @@ static s32 LookUpFileList(const char* pSearchPath /* r31 */, u32 parentEntry /* 
     s32 newEntry; // r30
     u32 entry; // r29
     s32 retEntry; // r25
-    u32* pNextEntry; // r27
+    u32* pNextEntry = NULL; // r27
     const char* pChildPath; // r24
     BOOL bChild; // r26
     s32 result; // r21
@@ -860,6 +860,8 @@ BOOL DVDRemove(const char* fileName /* r24 */, DVDFileInfo* fileInfo /* r31 */) 
     // -> struct OSThreadQueue __DVDThreadQueue;
     // -> static struct FSTEntry * FstStart;
     ASSERTMSGLINE(1376, fileName || fileInfo, "DVDRemove(): null pointer is specified to both file name and file info address  ");
+
+    (void)fileName;
 
     if (fileInfo) {
         pBlock = &fileInfo->cb;

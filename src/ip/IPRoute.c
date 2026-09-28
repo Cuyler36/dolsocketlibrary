@@ -244,8 +244,7 @@ void IPSetMtu(IPInterface* interface /* r31 */, s32 mtu /* r30 */) {
     ASSERTLINE(284, 68 <= mtu);
     interface = interface ? interface : &__IFDefault;
     enabled = OSDisableInterrupts();
-    mtu = (mtu < 68) ? 68 : mtu;
-    interface->mtu = mtu;
+    interface->mtu = (mtu < 68) ? 68 : mtu;
     OSRestoreInterrupts(enabled);
 }
 

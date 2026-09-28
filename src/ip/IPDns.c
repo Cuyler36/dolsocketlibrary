@@ -1224,7 +1224,7 @@ static void GetAddrInfoCallback(DNSCommand* cmd /* r31 */, s32 result /* r21 */)
     DNSHeader* dns; // r28
     u8* res; // r29
     u8* end; // r19
-    u8* ans; // r24
+    u8* ans = NULL; // r24
     u8* req; // r23
     int i; // r27
     u16 len; // r20

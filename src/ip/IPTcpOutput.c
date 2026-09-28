@@ -40,7 +40,8 @@ int TCPMakeOption(TCPHeader* tcp /* r25 */, TCPInfo* info /* r29 */, u16 flag /*
     int padding; // r24
     u8* opt; // r31
     IFBlock* block; // r26
-    s32* edge; // r30
+    s32* edge = NULL; // r30
+
 
     if (info == NULL) {
         tcp->flag &= ~0xF000;
@@ -73,7 +74,7 @@ int TCPMakeOption(TCPHeader* tcp /* r25 */, TCPInfo* info /* r29 */, u16 flag /*
                 }
                 edge[0] += info->recvNext - info->recvUser;
                 edge[1] = edge[0] + block->len;
-                edge += 2;
+                edge = edge + 2;
             }
         }
         ASSERTLINE(203, (u8*) edge - opt <= 4 * 2 * sizeof(s32) + 2);

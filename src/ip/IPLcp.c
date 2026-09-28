@@ -227,6 +227,7 @@ static int ReceiveConfigureNak(PPPConf* conf /* r3 */, LCPHeader* lcp /* r4 */) 
     u16 len; // r29
     LCPOpt* cur; // r1+0x14
     LCPOpt* nak; // r31
+    LCPOpt* end; // r1+0x10 (guessed)
 
     data = (u8*)lcp + sizeof(LCPHeader);
     len = lcp->len - sizeof(LCPHeader);
