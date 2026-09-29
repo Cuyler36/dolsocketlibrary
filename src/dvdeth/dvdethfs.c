@@ -612,6 +612,7 @@ static void FSTFree(u32 entry /* r31 */) {
 }
 
 // Range: 0xF08 -> 0xFE0
+#pragma dont_inline on // @HACK - this stops an inline from LookUpFileList from being performed
 static s32 mystrcmp(const char* path1 /* r28 */, const char* path2 /* r31 */) {
     // Local variables
     u8 tmp1; // r30
@@ -639,6 +640,7 @@ static s32 mystrcmp(const char* path1 /* r28 */, const char* path2 /* r31 */) {
 
     return -1;
 }
+#pragma dont_inline off
 
 // Range: 0xFE0 -> 0x10F4
 static u32 DeleteFileList(u32 parentEntry /* r30 */) {

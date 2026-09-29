@@ -353,7 +353,7 @@ static u8* DupName(u8* opt /* r29 */, DNSHeader* dns /* r1+0xC */, u8* ptr /* r3
     // Local variables
     u8 count; // r31
 
-    while (*ptr != 0) {
+    while (*ptr) {
         count = *ptr;
         if (count & 0xC0) {
             ptr = (u8*)dns + (*(u16*)ptr & ~0xC000);
@@ -1501,7 +1501,7 @@ Exit:
 // Range: 0x2B2C -> 0x2D74
 int SOGetAddrInfo(const char* nodeName /* r1+0x8 */, const char* servName /* r1+0xC */, const SOAddrInfo* hints /* r1+0x10 */, SOAddrInfo** res /* r27 */) {
     // Local variables
-    int result; // r1+0xE0
+    volatile int result; // r1+0xE0
     DNSCommand cmd; // r1+0xA4
     u8 addrList[140]; // r1+0x18
     BOOL enabled; // r26

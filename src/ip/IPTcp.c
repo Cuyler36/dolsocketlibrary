@@ -34,8 +34,9 @@ static u32 Rotate(u32 n /* r3 */, u32 s /* r4 */) {
 s32 TCPIsn(IPInfo* info /* r30 */) {
     // Local variables
     u32 m; // r31
+    u32 unused; // Assumed, required for stack in release
 
-    m = *(u32*)0x800030DC;
+    m = *__OSSystemTime;
     m = Rotate(m, m % 32);
     if (info) {
         m ^= IPU32(info->local.addr);
@@ -1257,7 +1258,7 @@ void TCPUpdateScoreboard(TCPInfo* info /* r30 */, TCPHeader* tcp /* r24 */, u8* 
     optlen -= 2;
     while (0 < optlen) {
         start = *edge++;
-        end = *edge++;
+        end = end = *edge++; // Double assignment required for release regalloc
         optlen -= 8;
         if (TCP_SEQ_GE(end, start)) {
             continue;

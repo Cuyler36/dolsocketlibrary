@@ -605,7 +605,7 @@ int SOSocket(int af, int type, int protocol) {
             udp = (UDPInfo*)SOAlloc(3, sizeof(UDPInfo));
             sendbuf = SOAlloc(4, UdpSendBuff);
             recvbuf = SOAlloc(5, UdpRecvBuff);
-            rc = UDPOpen(udp, recvbuf, UdpRecvBuff);
+            rc = (0, UDPOpen(udp, recvbuf, UdpRecvBuff)); // permuter: comma expression fixes release regalloc (type/sendbuf swap)
             if (rc >= 0) {
                 rc = UDPSetSendBuff(udp, sendbuf, UdpSendBuff);
             }

@@ -54,7 +54,7 @@ static int ReceiveChallenge(PPPConf* conf /* r29 */, CHAPHeader* chap /* r31 */)
 }
 
 // Range: 0x1B0 -> 0x1B8
-static int ReceiveResponse() {
+static int ReceiveResponse(PPPConf* conf /* unused */, CHAPHeader* chap /* unused */) {
     return TRUE;
 }
 

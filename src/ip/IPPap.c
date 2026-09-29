@@ -58,7 +58,7 @@ static int SendAuthenticateRequest(PPPConf* conf /* r31 */) {
 }
 
 // Range: 0x1E8 -> 0x1F0
-static int ReceiveAuthenticateRequest() {
+static int ReceiveAuthenticateRequest(PPPConf* conf /* unused */, PAPHeader* pap /* unused */) {
     return TRUE;
 }
 
